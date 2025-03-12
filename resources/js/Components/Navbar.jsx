@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const menuItems = [
     { title: 'Home', path: 'home' },
-    { title: 'Events', path: 'tickets' },
+    // { title: 'Events', path: 'tickets' },
     { title: 'My Ticket', path: 'home' },
   ];
 
@@ -84,7 +84,7 @@ const Navbar = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className='absolute right-0 mt-0 w-40 z-10 pt-2'
                 >
-                  <div className='bg-[#f2f2f2] dark:bg-[#252525] w-full rounded-lg p-2'>
+                  <div className='bg-[#f2f2f2] dark:bg-[#252525] shadow-md w-full rounded-lg p-2'>
                     <Link as='button' href={route("profile.edit")} className='hover:bg-white dark:text-white dark:hover:bg-[#1C1C1E] hover:shadow-sm flex items-center gap-2 px-4 py-2.5 text-sm rounded-lg w-full'>
                       <User size={16} /> Profile
                     </Link>
