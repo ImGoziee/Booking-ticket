@@ -5,10 +5,9 @@ import {
     Home,
     Users,
     LogOut,
-    Ticket,
     CalendarDays,
     Wallet,
-    Tickets,
+    ClockArrowUp,
 } from "lucide-react";
 import { Link, usePage } from "@inertiajs/react";
 import Notif from "@/Components/Admin/Notif";
@@ -51,9 +50,8 @@ const AuthenticatedLayout = ({ children }) => {
     const menuItems = [
         { icon: Home, label: "Overview", routes: "admin.dashboard" },
         { icon: Users, label: "Users", routes: "admin.users.index" },
-        { icon: Tickets, label: "Ticket Category", routes: "admin.dashboard" },
         { icon: CalendarDays, label: "Events", routes: "admin.events.index" },
-        { icon: Ticket, label: "Tickets", routes: "admin.dashboard" },
+        { icon: ClockArrowUp, label: "Orders", routes: "admin.orders.index" },
         { icon: Wallet, label: "Payment", routes: "admin.dashboard" },
     ];
 
