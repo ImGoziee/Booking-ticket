@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: "HeatherGreen";
+    src: url("/assets/fonts/heathergreen.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-heathergreen {
+    font-family: "HeatherGreen";
+}
+
+.merriweather {
+    font-family: "Merriweather", serif;
+}
+
+.poppins {
+    font-family: "Poppins", serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    background-color: #171717;
+    transition: background-color 5000s ease-in-out 0s,
+        color 5000s ease-in-out 0s;
+}
+
+.txt-gradient {
+    background: #555555;
+    background: linear-gradient(
+        to right,
+        #555555 0%,
+        #ffffff 20%,
+        #ffffff 80%,
+        #555555 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-gradient {
+    background: #4f46e5;
+    background: linear-gradient(
+        to right,
+        #9ca3af 0%,
+        #ffffff 30%,
+        #ffffff 40%,
+        #3f80cf 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-image {
+    mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) 20%,
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+.scroll-theme-1::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.scroll-theme-1::-webkit-scrollbar-thumb {
+    background-color: #60a5fa !important;
+    border-radius: 5px !important;
+}
+
+.scroll-theme-1::-webkit-scrollbar-track {
+    background-color: white !important;
+}
+
+.scroll-theme-x::-webkit-scrollbar {
+    height: 3px !important;
+}
+
+.scroll-theme-x::-webkit-scrollbar-thumb {
+    background-color: #f2f2f2 !important;
+    border-radius: 5px !important;
+}
+
+.scroll-theme-x::-webkit-scrollbar-track {
+    background-color: white !important;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+.hero-text-header {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-black to-[#1636F7] dark:from-yellow-100 dark:via-[#d1d5db] dark:to-yellow-200;
+}
+
+.hero-text-desc {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-black to-[#1636F7] dark:from-yellow-100 dark:via-[#d1d5db] dark:to-blue-400;
+}
+
+.find-ticket-input {
+    @apply dark:bg-[#171717] text-[#0A34C2] dark:text-white border-transparent dark:border-[#5347ffc0] placeholder-[#b3b3b59c] border w-full px-4 py-2 rounded-md shadow-sm;
+}
+
+.find-ticket-label {
+    @apply text-[#5447FF] dark:text-gray-600 flex items-center gap-2 text-sm mb-2 max-lg:mb-1;
+}
+
+.ticket-card {
+    @apply bg-gradient-to-b from-[#f2f2f2] to-white dark:from-[#171717] dark:to-[#171717] min-w-[400px] max-w-[400px] h-80 rounded-xl overflow-hidden shadow-md;
+}
+
+.ticket-section::-webkit-scrollbar {
+    height: 0px;
+}
+
+.loader {
+    width: 12px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: l5 1s infinite linear alternate;
+}
+@keyframes l5 {
+    0% {
+        box-shadow: 20px 0 #fff, -20px 0 #fff2;
+        background: #fff;
+    }
+    33% {
+        box-shadow: 20px 0 #fff, -20px 0 #fff2;
+        background: #fff2;
+    }
+    66% {
+        box-shadow: 20px 0 #fff2, -20px 0 #fff;
+        background: #fff2;
+    }
+    100% {
+        box-shadow: 20px 0 #fff2, -20px 0 #fff;
+        background: #fff;
+    }
+}
+
+.event-detail-title {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0A34C2] via-black to-black dark:from-[#60a5fa] dark:via-[#f2f2f2] dark:to-[#f2f2f2] ;
+}
