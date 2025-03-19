@@ -11,38 +11,20 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $data = Order::orderBy('id', 'desc')->get();
+        $data = Order::with(['user', 'event', 'ticket'])->orderBy('id', 'desc')->get();
 
         return Inertia::render('Admin/Orders/OrdersPage', ['orders' => $data]);
     }
 
-    public function showForm(Request $request)
+    public function showForm($orderId)
     {
-        $ticketData = $request->all();
+        $order = Order::with(['user', 'event', 'ticket'])->findOrFail($orderId);
 
-        if (isset($ticketData['data']) && is_array($ticketData['data'])) {
-            $ticketData = $ticketData['data'];
+        if ($order->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized');
         }
 
-        if (!empty($ticketData)) {
-            session(['ticketData' => $ticketData]);
-        } else {
-            $ticketData = session('ticketData', []);
-        }
-
-        if (isset($ticketData['event_id'])) {
-            $event = Event::find($ticketData['event_id']);
-            if ($event) {
-                $ticketData['name'] = $event->name;
-                $ticketData['images'] = $event->images;
-                $ticketData['location'] = $event->location;
-                $ticketData['date'] = $event->date;
-            }
-        }
-        
-        return Inertia::render('Main/FormOrder', [
-            'ticketData' => $ticketData
-        ]);
+        return Inertia::render('Main/FormOrder', ['order' => $order]);
     }
 
     public function processOrder(Request $request)
@@ -57,35 +39,15 @@ class OrdersController extends Controller
 
         $order = Order::create($validated);
 
-        return redirect()->route('checkout.confirmation', ['order' => $order->id]);
+        return redirect()->route('checkout.form', ['order' => $order->id]);
     }
 
-    public function confirmation($orderId)
+    public function getOrderTicket()
     {
-        $order = Order::with(['user', 'event', 'ticket'])->findOrFail($orderId);
-        $eventName = $order->event->name;
-        $eventLocation = $order->event->location;
-        $eventDate = $order->event->date;
-        $ticketCategory = $order->ticket->category;
-        $quantity = $order->qty;
-        $totalAmount = $order->amount;
-        
-        if ($order->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized');
-        }
-
-        return Inertia::render('Main/PaymentConfirmation', [
-            'order' => $order,
-            'eventDetails' => [
-                'name' => $eventName,
-                'location' => $eventLocation,
-                'date' => $eventDate,
-            ],
-            'ticketDetails' => [
-                'category' => $ticketCategory,
-                'quantity' => $quantity,
-                'totalAmount' => $totalAmount,
-            ],
-        ]);
+        $orders = Order::with(['user', 'event', 'ticket'])
+            ->whereHas('payments')
+            ->where('user_id', auth()->id())
+            ->get();
+        return response()->json($orders);
     }
 }

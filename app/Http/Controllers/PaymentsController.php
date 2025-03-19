@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,15 +10,21 @@ use Inertia\Inertia;
 use Midtrans\Config;
 use Midtrans\Notification;
 
-class MidtransController extends Controller
+class PaymentsController extends Controller
 {
     public function __construct()
     {
-        // Set konfigurasi Midtrans
         Config::$serverKey = config('services.midtrans.server_key');
         Config::$isProduction = config('services.midtrans.is_production');
         Config::$isSanitized = config('services.midtrans.sanitized');
         Config::$is3ds = config('services.midtrans.3ds');
+    }
+
+    public function index()
+    {
+        $data = Payment::orderBy('id', 'desc')->get();
+
+        return Inertia::render('Admin/Payments/PaymentsPage', ['payments' => $data]);
     }
 
     public function createPayment(Request $request, $orderId)
@@ -76,6 +83,7 @@ class MidtransController extends Controller
 
     public function paymentFinished(Request $request)
     {
+        Log::info('Payment finished request:', $request->all());
         return Inertia::render('Main/MidtransEndpoint/PaymentFinished');
     }
 }
