@@ -13,7 +13,7 @@ const Navbar = () => {
   const menuItems = [
     { title: 'Home', path: 'home' },
     // { title: 'Events', path: 'tickets' },
-    { title: 'My Ticket', path: 'home' },
+    { title: 'My Ticket', path: 'myticket' },
   ];
 
   // const [activeMenu, setActiveMenu] = useState(0);

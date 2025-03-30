@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IoIosArrowForward } from "react-icons/io";
 import RupiahFormatter from "@/lib/RupiahFormatter";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 function TicketCatAccordion({ getCat, isLoading, onCategorySelect }) {
     const [activeIndex, setActiveIndex] = useState(-1);
     const [ticketQty, setTicketQty] = useState(1);
+    const { auth } = usePage().props
 
     const handleClick = (index, category) => {
         const newIndex = activeIndex === index ? null : index;
@@ -14,16 +15,15 @@ function TicketCatAccordion({ getCat, isLoading, onCategorySelect }) {
         onCategorySelect(newIndex === null ? null : category);
         setTicketQty(1);
     };
-
+    
     const handleCheckout = (e, ticket) => {
         e.stopPropagation();
-        router.post('/checkout/form', {
+        router.post('/checkout/process', {
+            user_id: auth.user.id,
             ticket_id: ticket.id,
-            category: ticket.category,
             event_id: ticket.event_id,
-            ticket_price: ticket.ticket_price,
-            quantity: ticketQty,
-            total_price: ticket.ticket_price * ticketQty
+            qty: ticketQty,
+            amount: ticket.ticket_price * ticketQty,
         });
     };
 

@@ -22,6 +22,7 @@ const TanStackTable = ({
     globalFilter,
     onGlobalFilterChange,
     handleBtn,
+    canAdd = true,
 }) => {
     const table = useReactTable({
         data,
@@ -59,12 +60,14 @@ const TanStackTable = ({
                         ))}
                     </select>
                 </div>
-                <button
-                    onClick={handleBtn}
-                    className="bg-blue-600 hover:bg-blue-500 duration-150 text-white text-sm px-4 py-2 rounded-lg"
-                >
-                    Add New
-                </button>
+                {canAdd && (
+                    <button
+                        onClick={handleBtn}
+                        className="bg-blue-600 hover:bg-blue-500 duration-150 text-white text-sm px-4 py-2 rounded-lg"
+                    >
+                        Add New
+                    </button>
+                )}
             </div>
             {/* Search
             <div className="mb-4 relative">
@@ -78,7 +81,9 @@ const TanStackTable = ({
             </div> */}
 
             {/* Table */}
-            <div className={`rounded-lg border bg-[white] overflow-x-auto max-w-full scroll-theme-x`}>
+            <div
+                className={`rounded-lg border bg-[white] overflow-x-auto max-w-full scroll-theme-x`}
+            >
                 <table className="w-full text-sm">
                     <thead>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -93,9 +98,10 @@ const TanStackTable = ({
                                         onClick={header.column.getToggleSortingHandler()}
                                     >
                                         <div
-                                            className={` flex items-center gap-1 ${header.column.columnDef.meta
-                                                ?.className || ""
-                                                } `}
+                                            className={` flex items-center gap-1 ${
+                                                header.column.columnDef.meta
+                                                    ?.className || ""
+                                            } `}
                                         >
                                             {flexRender(
                                                 header.column.columnDef.header,
@@ -103,7 +109,7 @@ const TanStackTable = ({
                                             )}
                                             {header.column.getIsSorted() &&
                                                 (header.column.getIsSorted() ===
-                                                    "asc" ? (
+                                                "asc" ? (
                                                     <ChevronUp className="h-4 w-4" />
                                                 ) : (
                                                     <ChevronDown className="h-4 w-4" />
@@ -118,7 +124,10 @@ const TanStackTable = ({
                         {table.getRowModel().rows.map((row) => (
                             <tr key={row.id} className="border-b">
                                 {row.getVisibleCells().map((cell) => (
-                                    <td key={cell.id} className="px-4 py-3 text-zinc-700">
+                                    <td
+                                        key={cell.id}
+                                        className="px-4 py-3 text-zinc-700"
+                                    >
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()
@@ -141,7 +150,7 @@ const TanStackTable = ({
                     to{" "}
                     {Math.min(
                         table.getState().pagination.pageSize *
-                        (table.getState().pagination.pageIndex + 1),
+                            (table.getState().pagination.pageIndex + 1),
                         table.getFilteredRowModel().rows.length
                     )}{" "}
                     of {table.getFilteredRowModel().rows.length} entries

@@ -10,21 +10,17 @@ import { Link } from '@inertiajs/react';
 const LoginForm = ({ data, setData, errors, processing, canResetPassword }) => {
     return (
         <>
-            <h1 className='font-medium text-2xl leading-loose'>Sign in your Account</h1>
+            <h1 className='font-medium text-black text-2xl leading-loose'>Sign in your Account</h1>
             <p className='text-sm text-gray-400 txt-gradient'>Enter your account to continue exploring the application.</p>
             <div className="mt-6 flex gap-2">
                 <OauthButton>
                     <img src="/assets/svg/google.svg" className='w-6 h-6 rounded-full' alt="" />
                     <p>Google</p>
                 </OauthButton>
-                <OauthButton>
-                    <img src="/assets/svg/metamask.svg" className='w-6 h-6 rounded-full' alt="" />
-                    <p>MetaMask</p>
-                </OauthButton>
             </div>
             <div className="relative items-center justify-center w-full">
-                <hr className="h-px my-8 !bg-[#171717] border-0 w-full"></hr>
-                <span className="absolute px-3 text-gray-400 text-sm top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-black">Or</span>
+                <hr className="h-px my-8 !bg-gray-300 border-0 w-full"></hr>
+                <span className="absolute px-3 text-gray-400 text-sm top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white">Or</span>
             </div>
             <div className='w-full'>
                 <InputLabel htmlFor="email" value="Email" />
@@ -33,7 +29,7 @@ const LoginForm = ({ data, setData, errors, processing, canResetPassword }) => {
                     type="email"
                     name="email"
                     value={data.email}
-                    className="mt-2"
+                    className="mt-2 text-black"
                     autoComplete="username"
                     isFocused={true}
                     onChange={(e) => setData('email', e.target.value)}
@@ -47,7 +43,7 @@ const LoginForm = ({ data, setData, errors, processing, canResetPassword }) => {
                     type="password"
                     name="password"
                     value={data.password}
-                    className="mt-1"
+                    className="mt-1 text-black"
                     autoComplete="current-password"
                     onChange={(e) => setData('password', e.target.value)}
                 />

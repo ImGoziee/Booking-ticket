@@ -8,7 +8,7 @@ export default function PrimaryButton({
         <button
             {...props}
             className={
-                `rounded-lg bg-white py-3 text-md font-medium text-[#171717] transition duration-150 ease-in-out hover:bg-gray-200 ${
+                `rounded-lg bg-[#5447FF] py-3 text-md font-medium text-[#fff] transition duration-150 ease-in-out hover:bg-[#5347ffcc] ${
                     disabled && 'opacity-25'
                 } ` + className
             }

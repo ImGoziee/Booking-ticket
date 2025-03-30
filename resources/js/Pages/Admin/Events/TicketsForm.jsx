@@ -61,7 +61,7 @@ const SchedulesForm = ({ isOpen, onClose, formType, getData, getEventID }) => {
                 }
             });
         } else {
-            post(route("admin.events.schedule.store", {event: getEventID}), {
+            post(route("admin.events.ticket.store", {event: getEventID}), {
                 onSuccess: () => {
                     reset();
                     handleClose();

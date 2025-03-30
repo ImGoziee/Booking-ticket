@@ -4,16 +4,19 @@ import { MapPin, Calendar, Ticket, Search } from 'lucide-react';
 
 export const FindTickets = ({ onSearch, isLoading }) => {
     const [formData, setFormData] = useState({
-        // location: '',
-        // fromDate: '',
-        // toDate: '',
+        location: '',
+        fromDate: '',
+        toDate: '',
         artist: ''
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { location, fromDate, toDate, name, value } = e.target;
         setFormData(prev => ({
             ...prev,
+            [location]: value,
+            [fromDate]: value,
+            [toDate]: value,
             [name]: value
         }));
     };
@@ -64,7 +67,7 @@ export const FindTickets = ({ onSearch, isLoading }) => {
                             From Date
                         </label>
                         <input
-                            type="text"
+                            type="date"
                             name="fromDate"
                             placeholder="+ Add date"
                             className="find-ticket-input"
@@ -80,7 +83,7 @@ export const FindTickets = ({ onSearch, isLoading }) => {
                             To Date
                         </label>
                         <input
-                            type="text"
+                            type="date"
                             name="toDate"
                             placeholder="+ Add date"
                             className="find-ticket-input"

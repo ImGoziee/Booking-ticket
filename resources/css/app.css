@@ -39,8 +39,8 @@ input:-webkit-autofill:active {
     background: linear-gradient(
         to right,
         #555555 0%,
-        #ffffff 20%,
-        #ffffff 80%,
+        #000000 20%,
+        #000000 80%,
         #555555 100%
     );
     -webkit-background-clip: text;
@@ -183,5 +183,9 @@ input:-webkit-autofill:active {
 }
 
 .event-detail-title {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0A34C2] via-black to-black dark:from-[#60a5fa] dark:via-[#f2f2f2] dark:to-[#f2f2f2] ;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0A34C2] via-black to-black dark:from-[#60a5fa] dark:via-[#f2f2f2] dark:to-[#f2f2f2];
+}
+
+.inner-shadow {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }

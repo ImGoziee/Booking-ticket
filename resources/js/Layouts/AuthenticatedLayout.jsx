@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link, usePage } from "@inertiajs/react";
 import Notif from "@/Components/Admin/Notif";
+import Logo from "../../../public/assets/image/logooosss.png";
 
 const AuthenticatedLayout = ({ children }) => {
 
@@ -52,7 +53,7 @@ const AuthenticatedLayout = ({ children }) => {
         { icon: Users, label: "Users", routes: "admin.users.index" },
         { icon: CalendarDays, label: "Events", routes: "admin.events.index" },
         { icon: ClockArrowUp, label: "Orders", routes: "admin.orders.index" },
-        { icon: Wallet, label: "Payment", routes: "admin.dashboard" },
+        { icon: Wallet, label: "Payment", routes: "admin.payments.index" },
     ];
 
     // index of menu item
@@ -90,13 +91,11 @@ const AuthenticatedLayout = ({ children }) => {
                         animate={{ opacity: isOpen ? 1 : 1 }}
                         className="flex items-center space-x-3"
                     >
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                            <span className="text-white text-xl font-extrabold">G</span>
-                        </div>
+                        <img width={40} src={Logo} alt="Logo" className='rounded-md' />
                         <motion.span
-                            className="text-white font-medium text-lg uppercase"
+                            className="text-yellow-50 font-bold text-3xl"
                         >
-                            {isOpen ? "GigsPass" : ""}
+                            {isOpen ? "Qickets." : ""}
                         </motion.span>
                     </motion.div>
 
@@ -135,7 +134,7 @@ const AuthenticatedLayout = ({ children }) => {
                                 {activeIndex === index && (
                                     <motion.div
                                         layoutId="activeBackground"
-                                        className="absolute inset-0 rounded-xl bg-[#171717]"
+                                        className="absolute inset-0 rounded-xl bg-stone-800"
                                         initial={false}
                                         transition={{
                                             type: "spring",

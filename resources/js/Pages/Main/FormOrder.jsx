@@ -1,10 +1,11 @@
-import { Head, Link, router, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import RupiahFormatter from "@/lib/RupiahFormatter";
 import MainLayout from "@/Layouts/MainLayout";
 import { IoArrowBack } from "react-icons/io5";
+import { useEffect } from "react";
 
 const FormOrder = () => {
-    const { ticketData, auth } = usePage().props;
+    const { order, auth } = usePage().props;
 
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
@@ -12,7 +13,7 @@ const FormOrder = () => {
         return date.toLocaleString('en-US', options).replace(/ -/g, ' ').replace(',', ', ');
     };
 
-    if (!ticketData || Object.keys(ticketData).length === 0) {
+    if (!order || Object.keys(order).length === 0) {
         return (
             <MainLayout>
                 <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] p-4">
@@ -25,21 +26,48 @@ const FormOrder = () => {
         );
     }
 
-    const handlePayment = () => {
-        router.post('/checkout/process', {
-            user_id: auth.user.id,
-            event_id: ticketData.event_id,
-            ticket_id: ticketData.ticket_id,
-            qty: ticketData.quantity,
-            amount: ticketData.total_price,
-            status: 'pending'
-        });
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
+        script.setAttribute("data-client-key", import.meta.env.VITE_MIDTRANS_CLIENT_KEY);
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+    const handlePayment = async () => {
+        try {
+            const response = await axios.post(route('midtrans.create-payment', { order: order.id }));
+            const snapToken = response.data.snap_token;
+
+            window.snap.pay(snapToken, {
+                onSuccess: function (result) {
+                    console.log(result)
+                    window.location.href = route('midtrans.payment-finished');
+                },
+                onPending: function (result) {
+                    console.log(result);
+                },
+                onError: function (result) {
+                    console.log(result);
+                },
+                onClose: function () {
+                    console.log('Customer closed the popup without finishing the payment');
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
         <MainLayout>
-            <Head title={`Form Order ${ticketData.name}`} />
-            <section className="dark:bg-[#101010] my-24 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+            <Head title={`Form Order ${order.event.name}`} />
+            <section className="dark:bg-[#101010] my-24 rounded-xl shadow-md border border-[#f2f2f2] dark:border-slate-900">
                 <div className="flex justify-between items-center p-6 md:px-8">
                     {/* Page Title */}
                     <div>
@@ -48,7 +76,7 @@ const FormOrder = () => {
                     </div>
                     {/* Back Button */}
                     <Link
-                        href={route('getDetail', { id: ticketData.event_id })}
+                        href={route('getDetail', { id: order.event_id })}
                         as="button"
                         className="inline-flex items-center text-[#5447FF] dark:text-blue-400 hover:underline font-medium"
                     >
@@ -56,7 +84,7 @@ const FormOrder = () => {
                         Back to Events
                     </Link>
                 </div>
-                
+
                 {/* Two-column layout */}
                 <div className="flex flex-col md:flex-row gap-6 px-6 pb-8 md:px-8">
                     {/* Left column - Order details */}
@@ -82,20 +110,20 @@ const FormOrder = () => {
                                 </h2>
                                 <div className="flex flex-row gap-4">
                                     <div className="w-1/3 bg-gray-200 dark:bg-gray-700 border border-[#DDDAE7] dark:border-[#171717] rounded-lg overflow-hidden h-24 flex items-center justify-center">
-                                        <img src={ticketData.images} alt="Event" className="object-cover h-full w-full" />
+                                        <img src={order.event.images} alt="Event" className="object-cover h-full w-full" />
                                     </div>
                                     <div className="w-full space-y-2">
                                         <div className="flex justify-between">
                                             <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Event:</span>
-                                            <span className="font-semibold text-black dark:text-white text-sm max-md:max-w-[10rem] truncate">{ticketData.name || 'N/A'}</span>
+                                            <span className="font-semibold text-black dark:text-white text-sm max-md:max-w-[10rem] truncate">{order.event.name || 'N/A'}</span>
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Location:</span>
-                                            <span className="font-semibold text-black dark:text-white text-sm">{ticketData.location || 'N/A'}</span>
+                                            <span className="font-semibold text-black dark:text-white text-sm">{order.event.location || 'N/A'}</span>
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Date:</span>
-                                            <span className="font-semibold text-black dark:text-white text-sm">{ticketData.date ? formatDate(ticketData.date) : 'N/A'}</span>
+                                            <span className="font-semibold text-black dark:text-white text-sm">{order.event.date ? formatDate(order.event.date) : 'N/A'}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +186,7 @@ const FormOrder = () => {
                                             </div>
                                             <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Category:</span>
                                         </div>
-                                        <span className="font-semibold text-black dark:text-white text-sm">{ticketData.category || 'N/A'}</span>
+                                        <span className="font-semibold text-black dark:text-white text-sm">{order.ticket.category || 'N/A'}</span>
                                     </div>
                                     <div className="flex justify-between items-center p-1 border-b border-gray-100 dark:border-stone-600">
                                         <div className="flex items-center">
@@ -170,8 +198,8 @@ const FormOrder = () => {
                                             <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Price per Ticket:</span>
                                         </div>
                                         <span className="font-semibold text-black dark:text-white text-sm">
-                                            {ticketData.ticket_price ? (
-                                                <RupiahFormatter value={ticketData.ticket_price} />
+                                            {order.ticket.ticket_price ? (
+                                                <RupiahFormatter value={order.ticket.ticket_price} />
                                             ) : 'N/A'}
                                         </span>
                                     </div>
@@ -184,13 +212,13 @@ const FormOrder = () => {
                                             </div>
                                             <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Quantity:</span>
                                         </div>
-                                        <span className="font-semibold text-black dark:text-white text-sm">{ticketData.quantity || 0}</span>
+                                        <span className="font-semibold text-black dark:text-white text-sm">{order.qty || 0}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     {/* Right column - Summary and Payment */}
                     <div className="md:w-1/3 sticky top-0">
                         <div className="bg-[#f2f2f2] dark:bg-stone-800 rounded-xl overflow-hidden">
@@ -203,44 +231,44 @@ const FormOrder = () => {
                                     <h1 className="text-xl font-bold">Order Summary</h1>
                                 </div>
                             </div>
-                            
+
                             {/* Summary content */}
                             <div className="p-4 space-y-4">
                                 <div className="bg-white dark:bg-stone-700 rounded-lg p-3 space-y-2">
                                     <div className="flex justify-between items-center p-1 border-b border-gray-100 dark:border-stone-600">
                                         <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Event:</span>
-                                        <span className="font-semibold text-black dark:text-white text-sm max-md:max-w-[10rem] truncate">{ticketData.name || 'N/A'}</span>
+                                        <span className="font-semibold text-black dark:text-white text-sm max-md:max-w-[10rem] truncate">{order.event.name || 'N/A'}</span>
                                     </div>
                                     <div className="flex justify-between items-center p-1 border-b border-gray-100 dark:border-stone-600">
                                         <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Ticket Type:</span>
-                                        <span className="font-semibold text-black dark:text-white text-sm">{ticketData.category || 'N/A'}</span>
+                                        <span className="font-semibold text-black dark:text-white text-sm">{order.ticket.category || 'N/A'}</span>
                                     </div>
                                     <div className="flex justify-between items-center p-1 border-b border-gray-100 dark:border-stone-600">
                                         <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Price per Ticket:</span>
                                         <span className="font-semibold text-black dark:text-white text-sm">
-                                            {ticketData.ticket_price ? (
-                                                <RupiahFormatter value={ticketData.ticket_price} />
+                                            {order.ticket.ticket_price ? (
+                                                <RupiahFormatter value={order.ticket.ticket_price} />
                                             ) : 'N/A'}
                                         </span>
                                     </div>
                                     <div className="flex justify-between items-center p-1">
                                         <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Quantity:</span>
-                                        <span className="font-semibold text-black dark:text-white text-sm">{ticketData.quantity || 0}</span>
+                                        <span className="font-semibold text-black dark:text-white text-sm">{order.qty || 0}</span>
                                     </div>
                                 </div>
-                                
+
                                 {/* Total Amount */}
                                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
                                     <div className="flex justify-between items-center">
                                         <span className="text-blue-800 dark:text-blue-300 font-medium">Total Amount:</span>
                                         <span className="text-xl font-bold text-[#5447FF] dark:text-blue-400">
-                                            {ticketData.total_price ? (
-                                                <RupiahFormatter value={ticketData.total_price} />
+                                            {order.amount ? (
+                                                <RupiahFormatter value={order.amount} />
                                             ) : 'N/A'}
                                         </span>
                                     </div>
                                 </div>
-                                
+
                                 {/* Important Information */}
                                 <div className="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-lg">
                                     <div className="flex items-start">
@@ -252,7 +280,7 @@ const FormOrder = () => {
                                         </p>
                                     </div>
                                 </div>
-                                
+
                                 {/* Payment Button - Always visible */}
                                 <button
                                     className="w-full bg-[#5447FF] hover:bg-[#1636F7] text-white py-3 rounded-lg font-medium flex items-center justify-center transition-colors"
@@ -264,10 +292,10 @@ const FormOrder = () => {
                                     </svg>
                                     Continue to Payment
                                 </button>
-                                
+
                                 {/* Back button for smaller screens */}
                                 <Link
-                                    href={route('getDetail', { id: ticketData.event_id })}
+                                    href={route('getDetail', { id: order.event_id })}
                                     as="button"
                                     className="md:hidden w-full px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-stone-700 dark:hover:bg-stone-600 text-gray-800 dark:text-white rounded-lg font-medium text-center flex items-center justify-center mt-2"
                                 >
