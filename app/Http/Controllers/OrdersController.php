@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Log;
 
 class OrdersController extends Controller
 {
@@ -42,12 +43,16 @@ class OrdersController extends Controller
         return redirect()->route('checkout.form', ['order' => $order->id]);
     }
 
-    public function getOrderTicket()
+    public function getOrderTicket($ticket_id = null)
     {
-        $orders = Order::with(['user', 'event', 'ticket'])
+        $query = Order::with(['user', 'event', 'ticket'])
             ->whereHas('payments')
-            ->where('user_id', auth()->id())
-            ->get();
+            ->where('user_id', auth()->id());
+
+        if ($ticket_id) {
+            $query->where('id', $ticket_id);
+        }
+        $orders = $query->get();
         return response()->json($orders);
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Ticket;
 use App\Models\Event;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Log;
 
 class TicketController extends Controller
 {

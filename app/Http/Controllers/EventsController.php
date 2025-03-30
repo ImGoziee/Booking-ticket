@@ -6,6 +6,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
+use Log;
 use Storage;
 
 class EventsController extends Controller
@@ -106,9 +107,15 @@ class EventsController extends Controller
     public function getEvents(Request $request)
     {
         $query = Event::query();
-
+        Log::info($request->all());
         if ($request->filled('artist')) {
             $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->artist) . '%']);
+        }
+        if ($request->filled('location')) {
+            $query->whereRaw('LOWER(location) LIKE ?', ['%' . strtolower($request->location) . '%']);
+        }
+        if ($request->filled('fromDate') && $request->filled('toDate')) {
+            $query->whereBetween('date', [$request->fromDate, $request->toDate]);
         }
         $events = $query->get();
 
