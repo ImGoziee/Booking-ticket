@@ -1,3 +1,5 @@
+import DeleteModal from "@/Components/Admin/DeleteModal";
+import OrderCodeGenerator from "@/lib/OrderCodeGenerator";
 import RupiahFormatter from "@/lib/RupiahFormatter";
 import {
   AuthenticatedLayout,
@@ -10,10 +12,17 @@ import {
   Trash2,
 } from "@/Pages/Admin/import";
 
-const EventsPage = ({ orders }) => {
+const OrdersPage = ({ orders }) => {
   const columnHelper = createColumnHelper();
   const [globalFilter, setGlobalFilter] = useState("");
-  console.log(orders)
+
+  const [selectedData, setselectedData] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleDelete = (id) => {
+    setselectedData(id);
+    setIsDeleteModalOpen(true);
+  };
 
   const columns = [
     columnHelper.accessor('index', {
@@ -26,6 +35,18 @@ const EventsPage = ({ orders }) => {
         );
       },
       enableSorting: false,
+    }),
+    columnHelper.accessor(row => row, {
+      id: 'orderCode',
+      header: 'Order Code',
+      cell: ({ getValue }) => {
+        const row = getValue();
+        return (
+          <div className="whitespace-nowrap overflow-hidden text-yellow-600">
+            <OrderCodeGenerator createdAt={row.created_at} ticketId={row.id} />
+          </div>
+        );
+      },
     }),
     columnHelper.accessor('user.name', {
       header: 'Ordered by',
@@ -63,16 +84,29 @@ const EventsPage = ({ orders }) => {
       header: 'Amount',
       cell: ({ getValue }) => (
         <div className="whitespace-nowrap overflow-hidden">
-            <RupiahFormatter value={getValue()} />
+          <RupiahFormatter value={getValue()} />
         </div>
       ),
+    }),
+    columnHelper.accessor('created_at', {
+      header: 'Date',
+      cell: ({ getValue }) => {
+        const date = new Date(getValue());
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return (
+          <div className="whitespace-nowrap overflow-hidden">
+            {date.toLocaleDateString('id-ID', options)}
+          </div>
+        );
+      },
     }),
     columnHelper.accessor('id', {
       header: 'Action',
       cell: ({ row }) => (
         <div className="flex gap-1.5 justify-center">
           <button
-            className="p-1.5 text-[#f2f2f2] rounded"
+            onClick={() => handleDelete(row.original.id)}
+            className="p-1.5 text-red-500 rounded"
           >
             <Trash2 size={16} />
           </button>
@@ -101,8 +135,14 @@ const EventsPage = ({ orders }) => {
           canAdd={false}
         />
       </section>
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        id={selectedData}
+        deleteUrl="admin.orders.destroy"
+      />
     </AuthenticatedLayout>
   );
 };
 
-export default EventsPage;
+export default OrdersPage;
