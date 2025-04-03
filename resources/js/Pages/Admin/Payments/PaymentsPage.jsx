@@ -1,3 +1,4 @@
+import OrderCodeGenerator from "@/lib/OrderCodeGenerator";
 import {
   AuthenticatedLayout,
   React,
@@ -9,7 +10,7 @@ import {
   Trash2,
 } from "@/Pages/Admin/import";
 
-const EventsPage = ({ payments }) => {
+const PaymentsList = ({ payments }) => {
   const columnHelper = createColumnHelper();
   const [globalFilter, setGlobalFilter] = useState("");
 
@@ -25,20 +26,53 @@ const EventsPage = ({ payments }) => {
       },
       enableSorting: false,
     }),
-    columnHelper.accessor('id', {
-      header: 'Action',
-      cell: ({ row }) => (
-        <div className="flex gap-1.5 justify-center">
-          <button
-            className="p-1.5 text-[#f2f2f2] rounded"
-          >
-            <Trash2 size={16} />
-          </button>
+    columnHelper.accessor(row => row, {
+      id: 'orderCode',
+      header: 'Order Code',
+      cell: ({ getValue }) => {
+        const row = getValue();
+        return (
+          <div className="whitespace-nowrap overflow-hidden text-blue-600 hover:underline cursor-pointer">
+            <OrderCodeGenerator createdAt={row.created_at} ticketId={row.order_id} />
+          </div>
+        );
+      },
+    }),
+    columnHelper.accessor('amount', {
+      header: 'Amount',
+      cell: ({ getValue }) => (
+        <div className="whitespace-nowrap overflow-hidden">
+          {getValue()}
         </div>
       ),
-      meta: {
-        className: '!justify-center'
-      }
+    }),
+    columnHelper.accessor('payment_method', {
+      header: 'Payment Method',
+      cell: ({ getValue }) => (
+        <div className="whitespace-nowrap overflow-hidden">
+          {getValue()}
+        </div>
+      ),
+    }),
+    columnHelper.accessor('status', {
+      header: 'Status',
+      cell: ({ getValue }) => (
+        <div className="whitespace-nowrap overflow-hidden">
+          {getValue()}
+        </div>
+      ),
+    }),
+    columnHelper.accessor('created_at', {
+      header: 'Date',
+      cell: ({ getValue }) => {
+        const date = new Date(getValue());
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return (
+          <div className="whitespace-nowrap overflow-hidden">
+            {date.toLocaleDateString('id-ID', options)}
+          </div>
+        );
+      },
     }),
   ]
 
@@ -63,4 +97,4 @@ const EventsPage = ({ payments }) => {
   );
 };
 
-export default EventsPage;
+export default PaymentsList;
