@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GetArtistController;
 use App\Http\Controllers\OrdersController;
@@ -34,9 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Admin Route Group
 Route::middleware(['auth', 'verified', CheckRole::class . ':admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // Master User
     Route::prefix('/users')->name('users.')->group(function () {
