@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Payment;
@@ -77,6 +78,11 @@ class PaymentsController extends Controller
             'payment_method' => $notif->payment_type,
             'status' => $notif->transaction_status,
         ]);
+
+        $ticket = Ticket::find($order->ticket_id);
+        if ($ticket) {
+            $ticket->incrementSoldTickets($order->qty);
+        }
 
         return response()->json(['status' => 'success']);
     }

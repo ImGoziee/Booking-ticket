@@ -14,7 +14,6 @@ const Carousel = () => {
   const images = [
     '/storage/images/blacksabbath-banner.png',
     '/storage/images/metallica-banner.jpg',
-    '/storage/images/deftones-banner.jpg',
   ];
 
   useEffect(() => {

@@ -55,4 +55,14 @@ class OrdersController extends Controller
         $orders = $query->get();
         return response()->json($orders);
     }
+
+    public function destroy(Order $order)
+    {
+        try {
+            $order->delete();
+            return redirect()->back()->with('success', 'Data deleted successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete data');
+        }
+    }
 }

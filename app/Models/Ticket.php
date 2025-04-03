@@ -19,4 +19,10 @@ class Ticket extends Model
         'ticket_quantity',
         'ticket_sold',
     ];
+
+    public function incrementSoldTickets($qty)
+    {
+        $this->ticket_sold += $qty;
+        $this->save();
+    }
 }
