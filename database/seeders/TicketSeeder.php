@@ -343,56 +343,9 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             
-            // System of a Down (Event ID 8)
+            // Tool (Event ID 8)
             [
                 'event_id' => 8,
-                'category' => 'CAT 1A',
-                'ticket_price' => 2950000.00,
-                'ticket_quantity' => 350,
-                'ticket_sold' => 330,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 8,
-                'category' => 'CAT 1B',
-                'ticket_price' => 2350000.00,
-                'ticket_quantity' => 550,
-                'ticket_sold' => 515,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 8,
-                'category' => 'CAT 2A',
-                'ticket_price' => 1750000.00,
-                'ticket_quantity' => 850,
-                'ticket_sold' => 780,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 8,
-                'category' => 'CAT 2B',
-                'ticket_price' => 1400000.00,
-                'ticket_quantity' => 1050,
-                'ticket_sold' => 920,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 8,
-                'category' => 'CAT 3',
-                'ticket_price' => 850000.00,
-                'ticket_quantity' => 1700,
-                'ticket_sold' => 1430,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            
-            // Tool (Event ID 9)
-            [
-                'event_id' => 9,
                 'category' => 'CAT 1A',
                 'ticket_price' => 3400000.00,
                 'ticket_quantity' => 300,
@@ -401,7 +354,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 9,
+                'event_id' => 8,
                 'category' => 'CAT 1B',
                 'ticket_price' => 2800000.00,
                 'ticket_quantity' => 450,
@@ -410,7 +363,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 9,
+                'event_id' => 8,
                 'category' => 'CAT 2A',
                 'ticket_price' => 2100000.00,
                 'ticket_quantity' => 700,
@@ -419,7 +372,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 9,
+                'event_id' => 8,
                 'category' => 'CAT 2B',
                 'ticket_price' => 1700000.00,
                 'ticket_quantity' => 900,
@@ -428,7 +381,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 9,
+                'event_id' => 8,
                 'category' => 'CAT 3',
                 'ticket_price' => 1050000.00,
                 'ticket_quantity' => 1500,
@@ -437,56 +390,9 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             
-            // Rammstein (Event ID 10)
+            // Rage Against The Machine (Event ID 9)
             [
-                'event_id' => 10,
-                'category' => 'CAT 1A',
-                'ticket_price' => 3200000.00,
-                'ticket_quantity' => 500,
-                'ticket_sold' => 470,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 10,
-                'category' => 'CAT 1B',
-                'ticket_price' => 2600000.00,
-                'ticket_quantity' => 750,
-                'ticket_sold' => 690,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 10,
-                'category' => 'CAT 2A',
-                'ticket_price' => 1950000.00,
-                'ticket_quantity' => 1000,
-                'ticket_sold' => 850,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 10,
-                'category' => 'CAT 2B',
-                'ticket_price' => 1550000.00,
-                'ticket_quantity' => 1200,
-                'ticket_sold' => 980,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'event_id' => 10,
-                'category' => 'CAT 3',
-                'ticket_price' => 950000.00,
-                'ticket_quantity' => 2000,
-                'ticket_sold' => 1200,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            
-            // Rage Against The Machine (Event ID 11)
-            [
-                'event_id' => 11,
+                'event_id' => 9,
                 'category' => 'CAT 1A',
                 'ticket_price' => 3000000.00,
                 'ticket_quantity' => 400,
@@ -495,7 +401,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 11,
+                'event_id' => 9,
                 'category' => 'CAT 1B',
                 'ticket_price' => 2450000.00,
                 'ticket_quantity' => 600,
@@ -504,7 +410,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 11,
+                'event_id' => 9,
                 'category' => 'CAT 2A',
                 'ticket_price' => 1850000.00,
                 'ticket_quantity' => 900,
@@ -513,16 +419,16 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 11,
+                'event_id' => 9,
                 'category' => 'CAT 2B',
                 'ticket_price' => 1450000.00,
-                'ticket_quantity' => 1100,
+                'ticket_quantity' => 900,
                 'ticket_sold' => 980,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 11,
+                'event_id' => 9,
                 'category' => 'CAT 3',
                 'ticket_price' => 850000.00,
                 'ticket_quantity' => 1800,
@@ -531,9 +437,9 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             
-            // Korn (Event ID 12)
+            // Korn (Event ID 10)
             [
-                'event_id' => 12,
+                'event_id' => 10,
                 'category' => 'CAT 1A',
                 'ticket_price' => 2700000.00,
                 'ticket_quantity' => 350,
@@ -542,7 +448,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 12,
+                'event_id' => 10,
                 'category' => 'CAT 1B',
                 'ticket_price' => 2200000.00,
                 'ticket_quantity' => 550,
@@ -551,7 +457,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 12,
+                'event_id' => 10,
                 'category' => 'CAT 2A',
                 'ticket_price' => 1650000.00,
                 'ticket_quantity' => 800,
@@ -560,7 +466,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 12,
+                'event_id' => 10,
                 'category' => 'CAT 2B',
                 'ticket_price' => 1300000.00,
                 'ticket_quantity' => 1000,
@@ -569,7 +475,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 12,
+                'event_id' => 10,
                 'category' => 'CAT 3',
                 'ticket_price' => 800000.00,
                 'ticket_quantity' => 1600,
@@ -578,9 +484,9 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             
-            // Slayer (Event ID 13)
+            // Slayer (Event ID 11)
             [
-                'event_id' => 13,
+                'event_id' => 11,
                 'category' => 'CAT 1A',
                 'ticket_price' => 2850000.00,
                 'ticket_quantity' => 400,
@@ -589,7 +495,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 13,
+                'event_id' => 11,
                 'category' => 'CAT 1B',
                 'ticket_price' => 2350000.00,
                 'ticket_quantity' => 600,
@@ -598,7 +504,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 13,
+                'event_id' => 11,
                 'category' => 'CAT 2A',
                 'ticket_price' => 1800000.00,
                 'ticket_quantity' => 850,
@@ -607,7 +513,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 13,
+                'event_id' => 11,
                 'category' => 'CAT 2B',
                 'ticket_price' => 1400000.00,
                 'ticket_quantity' => 1050,
@@ -616,7 +522,7 @@ class TicketSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'event_id' => 13,
+                'event_id' => 11,
                 'category' => 'CAT 3',
                 'ticket_price' => 850000.00,
                 'ticket_quantity' => 1700,

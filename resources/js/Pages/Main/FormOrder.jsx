@@ -61,6 +61,7 @@ const FormOrder = () => {
             });
         } catch (error) {
             console.error(error);
+            console.log(order.id)
         }
     };
 

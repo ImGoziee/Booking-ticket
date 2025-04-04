@@ -85,11 +85,13 @@ const EventsDetail = () => {
                                     View Packages
                                 </Link>
                             </div>
-                            <img
-                                src={events.images}
-                                alt={events.name}
-                                className="w-[500px] rounded-xl"
-                            />
+                            <div className="w-[500px] h-[250px] rounded-xl overflow-hidden">
+                                <img
+                                    src={events.images}
+                                    alt={events.name}
+                                    className="w-full h-full object-fit"
+                                />
+                            </div>
                         </div>
                     </div>
                 )}

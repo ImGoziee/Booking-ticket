@@ -78,17 +78,17 @@ const TicketSection = ({ SectionType, ticketData, isLoading, skeletonCount = 4 }
             <div className='w-full h-full flex flex-col justify-center gap-2 px-4'>
               <h1 className='text-black/70 dark:text-yellow-100 text-lg font-bold text-start max-w-96 truncate'>{ticket.name}</h1>
               <div className='w-full'>
-                <div className='text-[#5447FF] flex items-center gap-2'>
+                <div className='text-[#5447FF] dark:text-blue-500 flex items-center gap-2'>
                   <CalendarDays size={15} />
                   <p>{new Date(ticket.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 </div>
-                <div className='text-[#5447FF] flex items-center gap-2'>
+                <div className='text-[#5447FF] dark:text-blue-500 flex items-center gap-2'>
                   <MapPin size={15} />
                   <p>{ticket.location}</p>
                 </div>
               </div>
               {/* backdrop */}
-              <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: isHovered === i ? 0 : 40, opacity: isHovered === i ? 1 : 0 }} transition={{ type: "tween", duration: 0.15 }} className='bg-black/50 dark:bg-black/75 absolute w-full h-full inset-0' />
+              <motion.div initial={{ y: 40, opacity: 0 }} animate={{ y: isHovered === i ? 0 : 40, opacity: isHovered === i ? 1 : 0 }} transition={{ type: "tween", duration: 0.15 }} className='bg-black/50 dark:bg-white/10 absolute w-full h-full inset-0' />
               <motion.div
                 className='text-[#0A34C2] dark:text-yellow-200 absolute flex items-center w-full h-full inset-0 justify-center text-lg'
                 initial={{ y: 40, opacity: 0 }}
@@ -98,7 +98,7 @@ const TicketSection = ({ SectionType, ticketData, isLoading, skeletonCount = 4 }
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <span className='bg-[#f2f2f2] dark:bg-black py-2 px-4 rounded-xl flex items-center'>
+                <span className='bg-[#f2f2f2] dark:bg-[#171717] py-2 px-4 rounded-xl flex items-center'>
                   <p>See Details</p>
                   <LuArrowUpRight size={20} />
                 </span>

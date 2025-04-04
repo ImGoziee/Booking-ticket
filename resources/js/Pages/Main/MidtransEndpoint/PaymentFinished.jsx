@@ -1,10 +1,11 @@
 import React from "react";
 import MainLayout from "@/Layouts/MainLayout";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 const PaymentFinished = () => {
     return (
         <MainLayout>
+            <Head title="Payment Finished" />
             <div className="h-[calc(100vh-120px)] mb-20 flex items-center justify-center">
                 <div className="max-w-md w-full bg-white dark:bg-[#171717] rounded-2xl shadow-xl p-8 text-center relative overflow-hidden">
                     {/* Gradient border */}
