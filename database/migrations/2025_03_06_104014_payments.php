@@ -11,11 +11,9 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->unsignedBigInteger('order_id');
-            $table->string('payment_id')->nullable();
             $table->decimal('amount', 15, 2);
             $table->string('payment_method')->nullable();
             $table->string('status')->default('pending');
-            $table->text('payload')->nullable();
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
