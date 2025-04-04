@@ -19,7 +19,7 @@ class EventSeeder extends Seeder
                 'date' => '2025-06-18 19:00:00',
                 'description' => 'Metallica concert bringing their heaviest hits to fans worldwide.',
                 'location' => 'Gelora Bung Karno Stadium, Jakarta',
-                'images' => '/storage/images/metallica.png',
+                'images' => '/storage/images/metallica.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -30,7 +30,7 @@ class EventSeeder extends Seeder
                 'location' => 'Wembley Stadium, London',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/black-sabbath.jpg'
+                'images' => '/storage/images/black-sabbath.webp'
             ],
             [
                 'name' => 'Deftones: Around the Fur Tour 2025',
@@ -39,7 +39,7 @@ class EventSeeder extends Seeder
                 'location' => 'Madison Square Garden, New York',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/deftones.png'
+                'images' => '/storage/images/deftones.jpg'
             ],
             [
                 'name' => 'Megadeth - Rust in Peace Tour',
@@ -48,7 +48,7 @@ class EventSeeder extends Seeder
                 'location' => 'The Forum, Los Angeles',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/megadeth.png'
+                'images' => '/storage/images/megadeth.webp'
             ],
             [
                 'name' => 'Linkin Park From Zero World Tour',
@@ -57,7 +57,7 @@ class EventSeeder extends Seeder
                 'location' => 'Olympic Stadium, Seoul',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/linkin-park.png'
+                'images' => '/storage/images/linkin-park.jpg'
             ],
             [
                 'name' => 'Iron Maiden Legacy of the Beast Tour',
@@ -66,7 +66,7 @@ class EventSeeder extends Seeder
                 'location' => 'O2 Arena, Prague',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/iron-maiden.png'
+                'images' => '/storage/images/iron-maiden.jpg'
             ],
             [
                 'name' => 'Slipknot 30th Anniversary Tour',
@@ -75,16 +75,7 @@ class EventSeeder extends Seeder
                 'location' => 'Download Festival Grounds, Donington Park',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/slipknot.png'
-            ],
-            [
-                'name' => 'System of a Down Reunion Tour',
-                'date' => '2025-11-05 20:00:00',
-                'description' => 'System of a Down reunites for a special limited engagement tour performing their greatest hits.',
-                'location' => 'AccorHotels Arena, Paris',
-                'created_at' => now(),
-                'updated_at' => now(),
-                'images' => '/storage/images/system-of-a-down.png'
+                'images' => '/storage/images/slipknot.webp'
             ],
             [
                 'name' => 'Tool Fear Inoculum Extended Tour',
@@ -93,16 +84,7 @@ class EventSeeder extends Seeder
                 'location' => 'Rogers Arena, Vancouver',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/tool.png'
-            ],
-            [
-                'name' => 'Rammstein Stadium Tour 2025',
-                'date' => '2025-06-07 20:00:00',
-                'description' => 'Rammstein brings their explosive pyrotechnic show to stadiums around the world.',
-                'location' => 'Olympiastadion, Berlin',
-                'created_at' => now(),
-                'updated_at' => now(),
-                'images' => '/storage/images/rammstein.png'
+                'images' => '/storage/images/tool.jpeg'
             ],
             [
                 'name' => 'Rage Against The Machine Revolution Tour',
@@ -111,7 +93,7 @@ class EventSeeder extends Seeder
                 'location' => 'Coachella Grounds, Indio',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/ratm.png'
+                'images' => '/storage/images/ratm.jpg'
             ],
             [
                 'name' => 'Korn Follow The Leader Anniversary',
@@ -120,7 +102,7 @@ class EventSeeder extends Seeder
                 'location' => 'Hollywood Bowl, Los Angeles',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/korn.png'
+                'images' => '/storage/images/korn.webp'
             ],
             [
                 'name' => 'Slayer Final World Tour - The Last Stand',
@@ -129,7 +111,7 @@ class EventSeeder extends Seeder
                 'location' => 'Ziggo Dome, Amsterdam',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'images' => '/storage/images/slayer.png'
+                'images' => '/storage/images/slayer.webp'
             ]
         ]);
     }
