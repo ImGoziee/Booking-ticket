@@ -32,9 +32,12 @@ class PaymentsController extends Controller
     {
         $order = Order::findOrFail($orderId);
 
+        $uniqueOrderId = $order->id . '-' . time();
+        $order->save();
+
         $params = [
             'transaction_details' => [
-                'order_id' => $order->id,
+                'order_id' => $uniqueOrderId,
                 'gross_amount' => $order->amount,
             ],
             'customer_details' => [
@@ -42,18 +45,18 @@ class PaymentsController extends Controller
                 'email' => $order->user->email,
             ],
             'enabled_payments' => [
-                'credit_card', 
-                'bca_va', 
-                'bni_va', 
-                'bri_va', 
-                'permata_va', 
+                'credit_card',
+                'bca_va',
+                'bni_va',
+                'bri_va',
+                'permata_va',
                 'other_va'
             ]
         ];
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-         
+
         return response()->json(['snap_token' => $snapToken]);
     }
 
@@ -67,7 +70,9 @@ class PaymentsController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Invalid signature key'], 403);
         }
 
-        $order = Order::find($notif->order_id);
+        $realOrderId = explode('-', $notif->order_id)[0];
+        $order = Order::find($realOrderId);
+        
         if (!$order) {
             return response()->json(['status' => 'error', 'message' => 'Order not found'], 404);
         }
